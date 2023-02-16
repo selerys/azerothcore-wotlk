@@ -23,7 +23,7 @@ DELETE FROM `creature` WHERE `id1` BETWEEN  @CENTRY+1 AND @CENTRY+10;
 INSERT INTO `creature` (`id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`)
 VALUES
 -- LM
-(@CENTRY+1,0,0,0,0,0,1,1,0,-8826.43,633.81,94.25,3.79,300,0,0,10635,0,0,0,0,0,"",0),
+(@CENTRY+1,0,0,0,0,0,1,1,0,-8826.43,633.81,94.25,3.79,300,0,0,10635,0,0,0,0,0,""),
 (@CENTRY+2,0,0,0,0,0,1,1,0,-8823.69,637.445,94.2362,2.2697,300,0,0,14193,8370,0,0,0,0,""),
 (@CENTRY+3,0,0,0,0,0,1,1,0,-8821.98,638.866,94.2287,2.29718,300,0,0,14193,8370,0,0,0,0,""),
 (@CENTRY+4,0,0,0,0,0,1,1,0,-8829.26,648.56,94.9568,5.29741,300,0,0,14193,8370,0,0,0,0,""),
