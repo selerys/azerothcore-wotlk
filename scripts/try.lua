@@ -16,74 +16,83 @@ local PLAYER_EVENT_ON_LOGIN = 3
   9		  Warlock
   11    Druid
 ]]
-local WARRIOR         = 1
-local PALADIN         = 2
-local HUNTER          = 3
-local ROGUE           = 4
-local PRIEST          = 5
-local DEATH_KNIGHT    = 6
-local SHAMAN          = 7
-local MAGE            = 8
-local WARLOCK         = 9
-local DRUID           = 11
+local WARRIOR = 1
+local PALADIN = 2
+local HUNTER = 3
+local ROGUE = 4
+local PRIEST = 5
+local DEATH_KNIGHT = 6
+local SHAMAN = 7
+local MAGE = 8
+local WARLOCK = 9
+local DRUID = 11
 
 -- 定义装备备注
-local EQUIPMENT_SLOT_START        = 0
-local EQUIPMENT_SLOT_HEAD         = 0
-local EQUIPMENT_SLOT_NECK         = 1
-local EQUIPMENT_SLOT_SHOULDERS    = 2
-local EQUIPMENT_SLOT_BODY         = 3
-local EQUIPMENT_SLOT_CHEST        = 4
-local EQUIPMENT_SLOT_WAIST        = 5
-local EQUIPMENT_SLOT_LEGS         = 6
-local EQUIPMENT_SLOT_FEET         = 7
-local EQUIPMENT_SLOT_WRISTS       = 8
-local EQUIPMENT_SLOT_HANDS        = 9
-local EQUIPMENT_SLOT_FINGER1      = 10
-local EQUIPMENT_SLOT_FINGER2      = 11
-local EQUIPMENT_SLOT_TRINKET1     = 12
-local EQUIPMENT_SLOT_TRINKET2     = 13
-local EQUIPMENT_SLOT_BACK         = 14
-local EQUIPMENT_SLOT_MAINHAND     = 15
-local EQUIPMENT_SLOT_OFFHAND      = 16
-local EQUIPMENT_SLOT_RANGED       = 17
-local EQUIPMENT_SLOT_TABARD       = 18
-local EQUIPMENT_SLOT_END          = 19
+local EQUIPMENT_SLOT_START = 0
+local EQUIPMENT_SLOT_HEAD = 0
+local EQUIPMENT_SLOT_NECK = 1
+local EQUIPMENT_SLOT_SHOULDERS = 2
+local EQUIPMENT_SLOT_BODY = 3
+local EQUIPMENT_SLOT_CHEST = 4
+local EQUIPMENT_SLOT_WAIST = 5
+local EQUIPMENT_SLOT_LEGS = 6
+local EQUIPMENT_SLOT_FEET = 7
+local EQUIPMENT_SLOT_WRISTS = 8
+local EQUIPMENT_SLOT_HANDS = 9
+local EQUIPMENT_SLOT_FINGER1 = 10
+local EQUIPMENT_SLOT_FINGER2 = 11
+local EQUIPMENT_SLOT_TRINKET1 = 12
+local EQUIPMENT_SLOT_TRINKET2 = 13
+local EQUIPMENT_SLOT_BACK = 14
+local EQUIPMENT_SLOT_MAINHAND = 15
+local EQUIPMENT_SLOT_OFFHAND = 16
+local EQUIPMENT_SLOT_RANGED = 17
+local EQUIPMENT_SLOT_TABARD = 18
+local EQUIPMENT_SLOT_END = 19
+
+-- 护甲技能
+local PLATE_SPELL = 750
+local MAIL_SPELL = 8737
 
 -- 穿戴装备设定
 local _Equipments = {
     [WARRIOR] = {
-      EQUIPMENT_SLOT_HEAD         = 35068,  -- item=35068/野蛮角斗士的板甲头盔
-      -- EQUIPMENT_SLOT_NECK         = 35068,  
-      EQUIPMENT_SLOT_SHOULDERS    = 35070,  -- item=35070/野蛮角斗士的板甲护肩
-      EQUIPMENT_SLOT_BODY         = 35066,  -- item=35066/野蛮角斗士的板甲护胸
-      EQUIPMENT_SLOT_HANDS        = 35067,  -- item=35067/野蛮角斗士的板甲手套
-      EQUIPMENT_SLOT_LEGS         = 35069,  -- item=35069/野蛮角斗士的板甲护腿
+        EQUIPMENT_SLOT_HEAD = 35068, -- item=35068/野蛮角斗士的板甲头盔
+        -- EQUIPMENT_SLOT_NECK         = 35068,  
+        EQUIPMENT_SLOT_SHOULDERS = 35070, -- item=35070/野蛮角斗士的板甲护肩
+        EQUIPMENT_SLOT_BODY = 35066, -- item=35066/野蛮角斗士的板甲护胸
+        EQUIPMENT_SLOT_HANDS = 35067, -- item=35067/野蛮角斗士的板甲手套
+        EQUIPMENT_SLOT_LEGS = 35069 -- item=35069/野蛮角斗士的板甲护腿
     }
 }
 
 -- print(_Equipments)
-
 local function OnCustomLoginHandle(event, player)
     player:SendBroadcastMessage("OnCustomLoginHandle")
     local _level = player:GetLevel()
     local _classId = player:GetClass()
 
     print('_classId: ', _classId)
-    print('WARRIOR: ', WARRIOR)
+    print('_Equipments: ', _Equipments[_classId])
 
-    -- 升级到70
     if _level == 1 then
-        player:SetLevel(70)
-    end
 
-    -- 将装备传到角色身上
-    if _classId == WARRIOR then
-        print('THIS IS WARRIOR!')
-        player:AddItem(35068, 1)
-        local _head = player:GetItemByEntry(35068)
-        print('GetItemByEntry: ', _head)
-        print('equippedItem: ', player:EquipItem(_head, 0))
+        -- 升级到70
+        player:SetLevel(70)
+
+        if _classId == WARRIOR then
+            print('THIS IS WARRIOR!')
+
+            -- 学习技能，包括武器技能，护甲技能
+            player:LearnSpell(PLATE_SPELL)
+
+            -- 将装备传到角色身上
+            -- player:AddItem(35068, 1)
+            -- local _head = player:GetItemByEntry(35068)
+            local _equippedItem = player:EquipItem(35068, 0)
+            print('equippedItem?  ', _equippedItem)
+        end
+
     end
 
     -- 给包包
