@@ -80,6 +80,7 @@ local function OnCustomLoginHandle(event, player)
     -- 将装备传到角色身上
     if _classId == WARRIOR then
       print('THIS IS WARRIOR!')
+      player:AddItem(35068,1)
       print('equippedItem: ',player:EquipItem(35068,0))
     end
 
