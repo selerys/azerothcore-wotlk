@@ -4,12 +4,15 @@ local PLAYER_EVENT_ON_LOGIN = 3
 
 local function OnCustomCreateHandle(event, player)
     player:SendBroadcastMessage("OnCustomCreateHandle")
-    player:SetLevel(2)
 end
 
 local function OnCustomLoginHandle(event, player)
     player:SendBroadcastMessage("OnCustomLoginHandle")
     local _level = player:GetLevel()
+
+    if _level == 1 then
+        player:SetLevel(5)
+    end
     player:SendBroadcastMessage("Play Level is: " .. _level)
 end
 
