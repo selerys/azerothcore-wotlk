@@ -82,7 +82,7 @@ local function OnCustomLoginHandle(event, player)
         print('THIS IS WARRIOR!')
         player:AddItem(35068, 1)
         local _head = player:GetItemByEntry(35068)
-        print('EQUIPMENT_HEAD: ', _head)
+        print('GetItemByEntry: ', _head)
         print('equippedItem: ', player:EquipItem(_head, 0))
     end
 
