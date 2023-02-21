@@ -69,8 +69,8 @@ local function OnCustomLoginHandle(event, player)
     local _level = player:GetLevel()
     local _classId = player:GetClass()
 
-    print('_classId ',_classId)
-    print('WARRIOR ',WARRIOR)
+    print('_classId: ',_classId)
+    print('WARRIOR: ',WARRIOR)
 
     -- 升级到70
     if _level == 1 then
@@ -79,7 +79,8 @@ local function OnCustomLoginHandle(event, player)
 
     -- 将装备传到角色身上
     if _classId == WARRIOR then
-      player:EquipItem(35068,0)
+      print('THIS IS WARRIOR!')
+      print('equippedItem: ',player:EquipItem(35068,0))
     end
 
     -- 给包包
