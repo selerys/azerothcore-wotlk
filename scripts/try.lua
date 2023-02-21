@@ -4,7 +4,7 @@ local PLAYER_EVENT_ON_LOGIN = 3
 
 local function OnCustomCreateHandle(event, player)
     player:SendBroadcastMessage("OnCustomCreateHandle")
-    PrintInfo(player);
+    player:SetLevel(2)
 end
 
 local function OnCustomLoginHandle(event, player)
