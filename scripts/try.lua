@@ -62,15 +62,15 @@ local _Equipments = {
     }
 }
 
-print(_Equipments)
+-- print(_Equipments)
 
 local function OnCustomLoginHandle(event, player)
     player:SendBroadcastMessage("OnCustomLoginHandle")
     local _level = player:GetLevel()
     local _classId = player:GetClass()
 
-    print('_classId: ',_classId)
-    print('WARRIOR: ',WARRIOR)
+    print('_classId: ', _classId)
+    print('WARRIOR: ', WARRIOR)
 
     -- 升级到70
     if _level == 1 then
@@ -79,9 +79,10 @@ local function OnCustomLoginHandle(event, player)
 
     -- 将装备传到角色身上
     if _classId == WARRIOR then
-      print('THIS IS WARRIOR!')
-      player:AddItem(35068,1)
-      print('equippedItem: ',player:EquipItem(35068,0))
+        print('THIS IS WARRIOR!')
+        local _head = player:AddItem(35068, 1)
+        print('EQUIPMENT_HEAD: ', _head)
+        print('equippedItem: ', player:EquipItem(_head, 0))
     end
 
     -- 给包包
@@ -90,6 +91,7 @@ local function OnCustomLoginHandle(event, player)
     -- 如果是战士学习几个姿态
 
 end
+
 
 
 local function _Switch(_choice)
