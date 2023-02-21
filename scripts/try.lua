@@ -3,14 +3,14 @@ local PLAYER_EVENT_ON_CHARACTER_CREATE = 1
 local PLAYER_EVENT_ON_LOGIN = 3
 
 local function OnCustomCreateHandle(event, player)
-    print('OnCustomCreateHandle')
+    player:SendBroadcastMessage("OnCustomCreateHandle")
     PrintInfo(player);
 end
 
 local function OnCustomLoginHandle(event, player)
-    print('OnCustomLoginHandle')
+    player:SendBroadcastMessage("OnCustomLoginHandle")
     local _level = player:GetLevel()
-    print('Play Level is: ', _level)
+    player:SendBroadcastMessage("Play Level is: " .. _level)
 end
 
 -- 注册事件
