@@ -69,6 +69,9 @@ local function OnCustomLoginHandle(event, player)
     local _level = player:GetLevel()
     local _classId = player:GetClass()
 
+    print('_classId ',_classId)
+    print('WARRIOR ',WARRIOR)
+
     -- 升级到70
     if _level == 1 then
         player:SetLevel(70)
