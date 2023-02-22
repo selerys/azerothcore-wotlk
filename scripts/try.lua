@@ -2,6 +2,8 @@
 --
 local PLAYER_EVENT_ON_LOGIN = 3
 
+local LOCALE_zhCN = 4
+
 -- 定义职业值
 --[[
   职业的值
@@ -73,16 +75,24 @@ local _Equipments = {
 
 -- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
 -- 战士这里多一个学技能的函数
-local function _InitWarrior(player)
+local function _Warrior(player)
     print('THIS IS WARRIOR!')
 
     -- 学习技能，包括武器技能，护甲技能
-    player:LearnSpell(PLATE_SPELL)
+    --player:LearnSpell(PLATE_SPELL)
 
     -- 将装备穿到角色身上
     -- 循环实现
-    local _equippedItem = player:EquipItem(35068, 0)
-    print('equippedItem?  ', _equippedItem)
+    for _slot, _equip in pairs(_Equipments[WARRIOR]) do
+        -- 判断是否能穿，不能穿抛出错误
+        if not player:CanEquipItem(_equip, _slot) then
+            player:SendBroadcastMessage("战士无法穿戴此物品" .. Item:GetItemLink(_equip))
+            error('')
+        end
+        player:EquipItem(_equip, _slot)
+    end
+    -- local _equippedItem = player:EquipItem(35068, 0)
+    -- print('equippedItem?  ', _equippedItem)
 end
 
 local function _InitLoginPlayer(_classId)
@@ -90,7 +100,7 @@ local function _InitLoginPlayer(_classId)
     -- [[ todo 判断 _choice 是否满足条件  ]] 
 
     local case = {
-        [1] = _InitWarrior
+        [1] = _Warrior
 
     }
 
@@ -126,6 +136,7 @@ local function _OnCustomLoginHandle(event, player)
             player:EquipItem(INVENTORY_SLOT_BAG, _slot)
         end
 
+        -- 初始化角色
         _InitLoginPlayer(_classId)(player)
 
         -- 根据职业选择Switch里面的函数方法执行

@@ -20,6 +20,8 @@ INSERT INTO `creature_template` VALUES
 -- 摆放位置
 --
 DELETE FROM `creature` WHERE `id1` BETWEEN  @CENTRY+1 AND @CENTRY+10;
+DELETE FROM `creature` WHERE `id1` = 35100 AND `map` = 0;   -- 删除LM飞行训练师
+DELETE FROM `creature` WHERE `id1` = 35093 AND `map` = 1;   -- 删除BL飞行训练师
 INSERT INTO `creature` (`id1`, `id2`, `id3`, `map`, `zoneId`, `areaId`, `spawnMask`, `phaseMask`, `equipment_id`, `position_x`, `position_y`, `position_z`, `orientation`, `spawntimesecs`, `wander_distance`, `currentwaypoint`, `curhealth`, `curmana`, `MovementType`, `npcflag`, `unit_flags`, `dynamicflags`, `ScriptName`)
 VALUES
 -- LM
@@ -43,6 +45,8 @@ VALUES
 -- 牌子NPC 摆放在达拉然
 (@CENTRY+6,0,0,571,0,0,1,1,0,5840.71,578.127,652.082,2.44447,300,0,0,20718,8538,0,0,0,0,'')
 ;
+
+
 
 
 -- 添加售卖的东西
