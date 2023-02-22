@@ -121,6 +121,7 @@
     "deno.lint": true,
     "Lua.diagnostics.globals": [
       "RegisterPlayerEvent",
-      "_InitWarriorPlayer"
+      "_InitWarriorPlayer",
+      "GetItemLink"
     ]
 }

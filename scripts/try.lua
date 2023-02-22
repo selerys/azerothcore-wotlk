@@ -79,15 +79,15 @@ local function _Warrior(player)
     print('THIS IS WARRIOR!')
 
     -- 学习技能，包括武器技能，护甲技能
-    --player:LearnSpell(PLATE_SPELL)
+    -- player:LearnSpell(PLATE_SPELL)
 
     -- 将装备穿到角色身上
     -- 循环实现
     for _slot, _equip in pairs(_Equipments[WARRIOR]) do
         -- 判断是否能穿，不能穿抛出错误
         if not player:CanEquipItem(_equip, _slot) then
-            player:SendBroadcastMessage("战士无法穿戴此物品" .. Item:GetItemLink(_equip))
-            error('')
+            player:SendBroadcastMessage("战士无法穿戴此物品: " .. GetItemLink(_equip, LOCALE_zhCN))
+            error(_equip .. ' can‘t equipped for WARRIOR')
         end
         player:EquipItem(_equip, _slot)
     end
