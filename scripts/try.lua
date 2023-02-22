@@ -54,20 +54,25 @@ local EQUIPMENT_SLOT_END = 19
 local PLATE_SPELL = 750
 local MAIL_SPELL = 8737
 
+-- 包包
+local INVENTORY_SLOT_BAG_START = 19
+local INVENTORY_SLOT_BAG_END = 23
+local INVENTORY_SLOT_BAG = 21876 -- item=21876/原始月布包
+
 -- 穿戴装备设定
 local _Equipments = {
     [WARRIOR] = {
-        EQUIPMENT_SLOT_HEAD = 35068, -- item=35068/野蛮角斗士的板甲头盔
+        [EQUIPMENT_SLOT_HEAD] = 35068, -- item=35068/野蛮角斗士的板甲头盔
         -- EQUIPMENT_SLOT_NECK         = 35068,  
-        EQUIPMENT_SLOT_SHOULDERS = 35070, -- item=35070/野蛮角斗士的板甲护肩
-        EQUIPMENT_SLOT_BODY = 35066, -- item=35066/野蛮角斗士的板甲护胸
-        EQUIPMENT_SLOT_HANDS = 35067, -- item=35067/野蛮角斗士的板甲手套
-        EQUIPMENT_SLOT_LEGS = 35069 -- item=35069/野蛮角斗士的板甲护腿
+        [EQUIPMENT_SLOT_SHOULDERS] = 35070, -- item=35070/野蛮角斗士的板甲护肩
+        [EQUIPMENT_SLOT_BODY] = 35066, -- item=35066/野蛮角斗士的板甲护胸
+        [EQUIPMENT_SLOT_HANDS] = 35067, -- item=35067/野蛮角斗士的板甲手套
+        [EQUIPMENT_SLOT_LEGS] = 35069 -- item=35069/野蛮角斗士的板甲护腿
     }
 }
 
 -- print(_Equipments)
-local function OnCustomLoginHandle(event, player)
+local function _OnCustomLoginHandle(event, player)
     player:SendBroadcastMessage("OnCustomLoginHandle")
     local _level = player:GetLevel()
     local _classId = player:GetClass()
@@ -76,10 +81,10 @@ local function OnCustomLoginHandle(event, player)
     print('_Equipments: ', _Equipments[_classId])
 
     if _level == 1 then
+
         -- 判断阵营之后移动
         if player:IsAlliance() then
             player:Teleport(0, -8857.735352, 596.638062, 92.02135, 0.86)
-
         elseif player:IsHorde() then
             -- [[ tuod 移动到奥格瑞玛 ]]
         else
@@ -88,6 +93,11 @@ local function OnCustomLoginHandle(event, player)
 
         -- 升级到70
         player:SetLevel(70)
+
+        -- 循环给包包
+        for _slot = INVENTORY_SLOT_BAG_START, INVENTORY_SLOT_BAG_END, 1 do
+            player:EquipItem(INVENTORY_SLOT_BAG, _slot)
+        end
 
         if _classId == WARRIOR then
             print('THIS IS WARRIOR!')
@@ -104,13 +114,10 @@ local function OnCustomLoginHandle(event, player)
 
     end
 
-    -- 给包包
-
     -- 按职业给礼包
     -- 如果是战士学习几个姿态
 
 end
-
 
 local function _Switch(_choice)
 
@@ -126,4 +133,4 @@ end
 -- 注册事件
 --
 
-RegisterPlayerEvent(PLAYER_EVENT_ON_LOGIN, OnCustomLoginHandle)
+RegisterPlayerEvent(PLAYER_EVENT_ON_LOGIN, _OnCustomLoginHandle)
