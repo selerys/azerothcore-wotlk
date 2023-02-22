@@ -66,16 +66,27 @@ local _Equipments = {
     }
 }
 
+
 -- print(_Equipments)
 local function OnCustomLoginHandle(event, player)
     player:SendBroadcastMessage("OnCustomLoginHandle")
     local _level = player:GetLevel()
     local _classId = player:GetClass()
+    local _factionId = player:GetFaction()
 
     print('_classId: ', _classId)
     print('_Equipments: ', _Equipments[_classId])
+    print('Returns the Unit‘ s faction ID.: ', _factionId)
 
     if _level == 1 then
+        -- 判断阵营之后移动
+        if player:IsAlliance() then
+            player:MoveTo(1, -8857.735352, 596.638062, 92.02135)
+        elseif player:IsHorde() then
+            -- [[ tuod 移动到奥格瑞玛 ]]
+        else
+            player:SendBroadcastMessage("Player faction is :" .. _factionId)
+        end
 
         -- 升级到70
         player:SetLevel(70)
@@ -101,6 +112,7 @@ local function OnCustomLoginHandle(event, player)
     -- 如果是战士学习几个姿态
 
 end
+
 
 
 
