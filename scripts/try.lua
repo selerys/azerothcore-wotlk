@@ -71,6 +71,33 @@ local _Equipments = {
     }
 }
 
+-- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
+-- 战士这里多一个学技能的函数
+local function _InitWarrior(player)
+    print('THIS IS WARRIOR!')
+
+    -- 学习技能，包括武器技能，护甲技能
+    player:LearnSpell(PLATE_SPELL)
+
+    -- 将装备穿到角色身上
+    -- 循环实现
+    local _equippedItem = player:EquipItem(35068, 0)
+    print('equippedItem?  ', _equippedItem)
+end
+
+local function _InitLoginPlayer(_classId)
+
+    -- [[ todo 判断 _choice 是否满足条件  ]] 
+
+    local case = {
+        [1] = _InitWarrior
+
+    }
+
+    return case[_classId]
+
+end
+
 -- print(_Equipments)
 local function _OnCustomLoginHandle(event, player)
     player:SendBroadcastMessage("OnCustomLoginHandle")
@@ -99,18 +126,20 @@ local function _OnCustomLoginHandle(event, player)
             player:EquipItem(INVENTORY_SLOT_BAG, _slot)
         end
 
-        if _classId == WARRIOR then
-            print('THIS IS WARRIOR!')
+        _InitLoginPlayer(_classId)(player)
 
-            -- 学习技能，包括武器技能，护甲技能
-            player:LearnSpell(PLATE_SPELL)
+        -- 根据职业选择Switch里面的函数方法执行
+        -- if _classId == WARRIOR then
+        --     print('THIS IS WARRIOR!')
 
-            -- 将装备传到角色身上
-            -- player:AddItem(35068, 1)
-            -- local _head = player:GetItemByEntry(35068)
-            local _equippedItem = player:EquipItem(35068, 0)
-            print('equippedItem?  ', _equippedItem)
-        end
+        --     -- 学习技能，包括武器技能，护甲技能
+        --     player:LearnSpell(PLATE_SPELL)
+
+        --     -- 将装备穿到角色身上
+        --     -- 循环实现
+        --     local _equippedItem = player:EquipItem(35068, 0)
+        --     print('equippedItem?  ', _equippedItem)
+        -- end
 
     end
 
@@ -118,17 +147,6 @@ local function _OnCustomLoginHandle(event, player)
     -- 如果是战士学习几个姿态
 
 end
-
-local function _Switch(_choice)
-
-    -- [[ todo 判断 _choice 是否满足条件  ]] 
-
-    local case = {1, 2, 3, 4, 5, 6, 7, 8, 9, 11}
-
-end
-
--- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
--- 战士这里多一个学技能的函数
 
 -- 注册事件
 --

@@ -118,5 +118,9 @@
     },
     "deno.enable": true,
     "deno.path": "deps/deno/bin/deno",
-    "deno.lint": true
+    "deno.lint": true,
+    "Lua.diagnostics.globals": [
+      "RegisterPlayerEvent",
+      "_InitWarriorPlayer"
+    ]
 }
