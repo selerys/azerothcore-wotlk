@@ -78,7 +78,7 @@ local function OnCustomLoginHandle(event, player)
     if _level == 1 then
         -- 判断阵营之后移动
         if player:IsAlliance() then
-            player:Teleport(1,-8857.735352, 596.638062, 92.02135, 0.86)
+            player:Teleport(0, -8857.735352, 596.638062, 92.02135, 0.86)
 
         elseif player:IsHorde() then
             -- [[ tuod 移动到奥格瑞玛 ]]
@@ -110,6 +110,7 @@ local function OnCustomLoginHandle(event, player)
     -- 如果是战士学习几个姿态
 
 end
+
 
 local function _Switch(_choice)
 
