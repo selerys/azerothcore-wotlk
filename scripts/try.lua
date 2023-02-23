@@ -31,25 +31,25 @@ local DRUID = 11
 
 -- 定义装备备注
 local EQUIPMENT_SLOT_START = 0
-local EQUIPMENT_SLOT_HEAD = 0
-local EQUIPMENT_SLOT_NECK = 1
-local EQUIPMENT_SLOT_SHOULDERS = 2
-local EQUIPMENT_SLOT_BODY = 3
-local EQUIPMENT_SLOT_CHEST = 4
-local EQUIPMENT_SLOT_WAIST = 5
-local EQUIPMENT_SLOT_LEGS = 6
-local EQUIPMENT_SLOT_FEET = 7
-local EQUIPMENT_SLOT_WRISTS = 8
-local EQUIPMENT_SLOT_HANDS = 9
-local EQUIPMENT_SLOT_FINGER1 = 10
-local EQUIPMENT_SLOT_FINGER2 = 11
-local EQUIPMENT_SLOT_TRINKET1 = 12
-local EQUIPMENT_SLOT_TRINKET2 = 13
-local EQUIPMENT_SLOT_BACK = 14
-local EQUIPMENT_SLOT_MAINHAND = 15
-local EQUIPMENT_SLOT_OFFHAND = 16
-local EQUIPMENT_SLOT_RANGED = 17
-local EQUIPMENT_SLOT_TABARD = 18
+local EQUIPMENT_SLOT_HEAD = 0 -- 头
+local EQUIPMENT_SLOT_NECK = 1 -- 项链
+local EQUIPMENT_SLOT_SHOULDERS = 2 -- 肩膀
+local EQUIPMENT_SLOT_BODY = 3 -- 衬衫
+local EQUIPMENT_SLOT_CHEST = 4 -- 胸
+local EQUIPMENT_SLOT_WAIST = 5 -- 腰带
+local EQUIPMENT_SLOT_LEGS = 6 -- 腿
+local EQUIPMENT_SLOT_FEET = 7 -- 脚
+local EQUIPMENT_SLOT_WRISTS = 8 -- 手腕
+local EQUIPMENT_SLOT_HANDS = 9 -- 手
+local EQUIPMENT_SLOT_FINGER1 = 10 -- 戒指1
+local EQUIPMENT_SLOT_FINGER2 = 11 -- 戒指2
+local EQUIPMENT_SLOT_TRINKET1 = 12 -- 饰品1
+local EQUIPMENT_SLOT_TRINKET2 = 13 -- 饰品1
+local EQUIPMENT_SLOT_BACK = 14 -- 背部
+local EQUIPMENT_SLOT_MAINHAND = 15 -- 主手
+local EQUIPMENT_SLOT_OFFHAND = 16 -- 副手
+local EQUIPMENT_SLOT_RANGED = 17 -- 远程
+local EQUIPMENT_SLOT_TABARD = 18 -- 战袍
 local EQUIPMENT_SLOT_END = 19
 
 -- 护甲技能
@@ -67,9 +67,9 @@ local _Equipments = {
         [EQUIPMENT_SLOT_HEAD] = 35068, -- item=35068/野蛮角斗士的板甲头盔
         -- EQUIPMENT_SLOT_NECK         = 35068,  
         [EQUIPMENT_SLOT_SHOULDERS] = 35070, -- item=35070/野蛮角斗士的板甲护肩
-        [EQUIPMENT_SLOT_BODY] = 35066, -- item=35066/野蛮角斗士的板甲护胸
+        [EQUIPMENT_SLOT_CHEST] = 35066, -- item=35066/野蛮角斗士的板甲护胸
         [EQUIPMENT_SLOT_HANDS] = 35067, -- item=35067/野蛮角斗士的板甲手套
-        -- [EQUIPMENT_SLOT_LEGS] = 35069 -- item=35069/野蛮角斗士的板甲护腿
+        [EQUIPMENT_SLOT_LEGS] = 35069 -- item=35069/野蛮角斗士的板甲护腿
     }
 }
 
@@ -84,6 +84,8 @@ local function _Warrior(player)
     -- 将装备穿到角色身上
     -- 循环实现
     for _slot, _equip in pairs(_Equipments[WARRIOR]) do
+        -- todo 先脱掉装备再穿，需要写函数
+
         -- 判断是否能穿，不能穿抛出错误
         if not player:CanEquipItem(_equip, _slot) then
             player:SendBroadcastMessage("您的角色当前无法穿戴此物品: " .. GetItemLink(_equip, LOCALE_zhCN))
