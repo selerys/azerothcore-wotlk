@@ -69,7 +69,7 @@ local _Equipments = {
         [EQUIPMENT_SLOT_SHOULDERS] = 35070, -- item=35070/野蛮角斗士的板甲护肩
         [EQUIPMENT_SLOT_BODY] = 35066, -- item=35066/野蛮角斗士的板甲护胸
         [EQUIPMENT_SLOT_HANDS] = 35067, -- item=35067/野蛮角斗士的板甲手套
-        [EQUIPMENT_SLOT_LEGS] = 35069 -- item=35069/野蛮角斗士的板甲护腿
+        -- [EQUIPMENT_SLOT_LEGS] = 35069 -- item=35069/野蛮角斗士的板甲护腿
     }
 }
 
