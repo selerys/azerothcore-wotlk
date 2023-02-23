@@ -73,7 +73,6 @@ local _Equipments = {
     }
 }
 
-local _Classer = {}
 local _Character = {}
 
 -- 将装备穿到角色身上
@@ -101,28 +100,55 @@ end
 
 -- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
 -- 战士这里多一个学技能的函数
-function _Classer:_Warrior(player)
-    print('THIS IS WARRIOR!')
+-- function _ClassInit:_Warrior(player)
+--     print('THIS IS WARRIOR!')
 
-    -- 学习技能，包括武器技能，护甲技能
-    player:LearnSpell(PLATE_SPELL)
+--     -- 学习技能，包括武器技能，护甲技能
+--     player:LearnSpell(PLATE_SPELL)
 
-    _Character:_EquipItem(player)
+--     _Character:_EquipItem(player)
+--     -- local _equippedItem = player:EquipItem(35068, 0)
+--     -- print('equippedItem?  ', _equippedItem)
+-- end
+
+-- function _Character:_InitLoginPlayer(_classId, player)
+--     -- [[ todo 判断 _choice 是否满足条件  ]] 
+
+--     local _CASE = {
+--         [1] = _Classer._Warrior
+--     }
+
+--     _CASE[_classId](player)
+
+-- end
+
+-- 职业初始化
+local _Classer = {}
+
+_Classer.Entry = {
+    -- 1: WARRIOR
+    [WARRIOR] = function(player)
+        print('THIS IS WARRIOR!')
+
+        -- 学习技能，包括武器技能，护甲技能
+        player:LearnSpell(PLATE_SPELL)
+
+        _Character:_EquipItem(player)
+    end
+}
+
+function _Classer:Init(_classId, player)
+    -- print('THIS IS WARRIOR!')
+
+    -- -- 学习技能，包括武器技能，护甲技能
+    -- player:LearnSpell(PLATE_SPELL)
+
+    -- _Character:_EquipItem(player)
     -- local _equippedItem = player:EquipItem(35068, 0)
     -- print('equippedItem?  ', _equippedItem)
-end
-
-function _Character:_InitLoginPlayer(_classId, player)
-    -- [[ todo 判断 _choice 是否满足条件  ]] 
-
-    local _CASE = {
-        [1] = _Classer._Warrior
-    }
-
-    _CASE[_classId](player)
+    self.Entry[_classId](player)
 
 end
-
 -- local _InitLoginPlayer = {
 --     [1] = _Classer._Warrior
 -- }
@@ -155,8 +181,8 @@ local function _OnCustomLoginHandle(event, player)
             player:EquipItem(INVENTORY_SLOT_BAG, _slot)
         end
 
-        -- 初始化角色
-        _Character:_InitLoginPlayer(_classId, player)
+        -- *** 初始化角色 ***
+        _Classer:Init(_classId, player)
 
     end
 
