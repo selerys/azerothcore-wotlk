@@ -75,9 +75,14 @@ local _Equipments = {
 
 -- todo 先删掉装备再穿，需要写函数
 local function _ChangeEquipItem(player, slot)
+    print('_ChangeEquipItem SLOT :' .. slot)
     -- 获取是什么装备，然后放到包包里面
     local _offItem = player:GetEquippedItemBySlot(slot)
-    player:RemoveItem(_offItem)
+    if _offItem then
+        player:RemoveItem(_offItem)
+    else
+        print('SLOT :' .. slot .. '没有装备任何物品')
+    end
 
 end
 
