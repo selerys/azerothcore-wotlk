@@ -73,51 +73,51 @@ local _Equipments = {
     }
 }
 
--- todo 先删掉装备再穿，需要写函数
-local function _ChangeEquipItem(player, slot)
-    print('_ChangeEquipItem SLOT :' .. slot)
-    -- 获取是什么装备，然后放到包包里面
-    local _offItem = player:GetEquippedItemBySlot(slot)
-    if _offItem then
-        player:RemoveItem(_offItem, 1)
-    else
-        print('SLOT :' .. slot .. '没有装备任何物品')
-    end
-
-end
+local _Classer = {}
+local _Character = {}
 
 -- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
 -- 战士这里多一个学技能的函数
-local function _Warrior(player)
+function _Classer:_Warrior(player)
     print('THIS IS WARRIOR!')
 
     -- 学习技能，包括武器技能，护甲技能
     player:LearnSpell(PLATE_SPELL)
 
-    -- 将装备穿到角色身上
-    -- 循环实现
-    for _slot, _equip in pairs(_Equipments[WARRIOR]) do
-
-        -- 先删掉装备再穿
-        _ChangeEquipItem(player, _slot)
-
-        -- 判断是否能穿，不能穿抛出错误
-        if not player:CanEquipItem(_equip, _slot) then
-            player:SendBroadcastMessage("您的角色当前无法穿戴此物品: " .. GetItemLink(_equip, LOCALE_zhCN))
-            error('Item  = / ' .. _equip .. ' / can‘t equipped for WARRIOR')
-        end
-        player:EquipItem(_equip, _slot)
-    end
+    _Character:_EquipItem(player)
     -- local _equippedItem = player:EquipItem(35068, 0)
     -- print('equippedItem?  ', _equippedItem)
 end
 
-local function _InitLoginPlayer(_classId)
+-- 将装备穿到角色身上
+-- 循环实现
+function _Character:_EquipItem(player)
+    for _slot, _equipId in pairs(_Equipments[WARRIOR]) do
+
+        -- 先删掉装备再穿
+        local _offItem = player:GetEquippedItemBySlot(_slot)
+        if _offItem then
+            print('SLOT :' .. _slot .. ' ,去除Item')
+            player:RemoveItem(_offItem, 1)
+        end
+
+        -- 判断是否能穿，不能穿抛出错误
+        if not player:CanEquipItem(_equipId, _slot) then
+            error('Item  = [' .. _equipId .. '] can‘t equipped for WARRIOR')
+        end
+
+        -- *** 装备物品 ***
+        player:EquipItem(_equipId, _slot)
+    end
+
+end
+
+function _Character:_InitLoginPlayer(_classId)
 
     -- [[ todo 判断 _choice 是否满足条件  ]] 
 
     local case = {
-        [1] = _Warrior
+        [1] = _Classer._Warrior
 
     }
 
@@ -155,19 +155,6 @@ local function _OnCustomLoginHandle(event, player)
 
         -- 初始化角色
         _InitLoginPlayer(_classId)(player)
-
-        -- 根据职业选择Switch里面的函数方法执行
-        -- if _classId == WARRIOR then
-        --     print('THIS IS WARRIOR!')
-
-        --     -- 学习技能，包括武器技能，护甲技能
-        --     player:LearnSpell(PLATE_SPELL)
-
-        --     -- 将装备穿到角色身上
-        --     -- 循环实现
-        --     local _equippedItem = player:EquipItem(35068, 0)
-        --     print('equippedItem?  ', _equippedItem)
-        -- end
 
     end
 
