@@ -76,19 +76,6 @@ local _Equipments = {
 local _Classer = {}
 local _Character = {}
 
--- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
--- 战士这里多一个学技能的函数
-function _Classer:_Warrior(player)
-    print('THIS IS WARRIOR!')
-
-    -- 学习技能，包括武器技能，护甲技能
-    player:LearnSpell(PLATE_SPELL)
-
-    _Character:_EquipItem(player)
-    -- local _equippedItem = player:EquipItem(35068, 0)
-    -- print('equippedItem?  ', _equippedItem)
-end
-
 -- 将装备穿到角色身上
 -- 循环实现
 function _Character:_EquipItem(player)
@@ -110,6 +97,19 @@ function _Character:_EquipItem(player)
         player:EquipItem(_equipId, _slot)
     end
 
+end
+
+-- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
+-- 战士这里多一个学技能的函数
+function _Classer:_Warrior(player)
+    print('THIS IS WARRIOR!')
+
+    -- 学习技能，包括武器技能，护甲技能
+    player:LearnSpell(PLATE_SPELL)
+
+    _Character:_EquipItem(player)
+    -- local _equippedItem = player:EquipItem(35068, 0)
+    -- print('equippedItem?  ', _equippedItem)
 end
 
 function _Character:_InitLoginPlayer(_classId)
