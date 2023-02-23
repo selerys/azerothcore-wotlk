@@ -117,7 +117,6 @@ function _Character:_InitLoginPlayer(_classId, player)
 
     local _CASE = {
         [1] = _Classer._Warrior
-
     }
 
     _CASE[_classId](player)
