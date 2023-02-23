@@ -158,7 +158,7 @@ local function _OnCustomLoginHandle(event, player)
 
         -- 初始化角色
         -- _Character:_InitLoginPlayer(_classId)(player)
-        print(_Character:_InitLoginPlayer(_classId))
+        _Character:_InitLoginPlayer(_classId)(player)
 
     end
 
