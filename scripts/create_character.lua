@@ -113,17 +113,20 @@ function _Classer:_Warrior(player)
 end
 
 function _Character:_InitLoginPlayer(_classId)
-
     -- [[ todo 判断 _choice 是否满足条件  ]] 
 
-    local case = {
+    local _CASE = {
         [1] = _Classer._Warrior
 
     }
 
-    return case[_classId]
+    return _CASE[_classId]
 
 end
+
+-- local _InitLoginPlayer = {
+--     [1] = _Classer._Warrior
+-- }
 
 -- print(_Equipments)
 local function _OnCustomLoginHandle(event, player)
@@ -154,7 +157,8 @@ local function _OnCustomLoginHandle(event, player)
         end
 
         -- 初始化角色
-        (_Character:_InitLoginPlayer(_classId))(player)
+        -- _Character:_InitLoginPlayer(_classId)(player)
+        print(_Character:_InitLoginPlayer(_classId))
 
     end
 
