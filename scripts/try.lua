@@ -73,6 +73,14 @@ local _Equipments = {
     }
 }
 
+-- todo 先删掉装备再穿，需要写函数
+local function _ChangeEquipItem(player, slot)
+    -- 获取是什么装备，然后放到包包里面
+    local _offItem = player:GetEquippedItemBySlot(slot)
+    player:RemoveItem(_offItem)
+
+end
+
 -- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
 -- 战士这里多一个学技能的函数
 local function _Warrior(player)
@@ -84,7 +92,9 @@ local function _Warrior(player)
     -- 将装备穿到角色身上
     -- 循环实现
     for _slot, _equip in pairs(_Equipments[WARRIOR]) do
-        -- todo 先脱掉装备再穿，需要写函数
+
+        -- 先删掉装备再穿
+        _ChangeEquipItem(player, _slot)
 
         -- 判断是否能穿，不能穿抛出错误
         if not player:CanEquipItem(_equip, _slot) then
