@@ -73,7 +73,8 @@ local _Equipments = {
         [EQUIPMENT_SLOT_LEGS] = 35069, -- item=35069/野蛮角斗士的板甲护腿
         [EQUIPMENT_SLOT_FEET] = 35146, -- item=35146/护卫者的板甲护胫
         [EQUIPMENT_SLOT_WRISTS] = 35176, -- item=35176/护卫者的板甲护腕
-        [EQUIPMENT_SLOT_FINGER1] = 35131, -- item=35131/护卫者的胜利指环
+        -- [EQUIPMENT_SLOT_FINGER1] = 35131, -- item=35131/护卫者的胜利指环
+        [EQUIPMENT_SLOT_FINGER1] = 33919, -- item=33919/守备官的胜利指环
         [EQUIPMENT_SLOT_FINGER2] = 35131, -- item=35131/护卫者的胜利指环
         [EQUIPMENT_SLOT_TRINKET1] = 41589, -- item=41589/战斗大师的决断
         [EQUIPMENT_SLOT_TRINKET2] = 41588, -- item=35131/护卫者的胜利指环
