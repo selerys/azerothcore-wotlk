@@ -65,11 +65,23 @@ local INVENTORY_SLOT_BAG = 21876 -- item=21876/原始月布包
 local _Equipments = {
     [WARRIOR] = {
         [EQUIPMENT_SLOT_HEAD] = 35068, -- item=35068/野蛮角斗士的板甲头盔
-        -- EQUIPMENT_SLOT_NECK         = 35068,  
+        [EQUIPMENT_SLOT_NECK] = 35135, -- item=35135/护卫者的胜利坠饰
         [EQUIPMENT_SLOT_SHOULDERS] = 35070, -- item=35070/野蛮角斗士的板甲护肩
         [EQUIPMENT_SLOT_CHEST] = 35066, -- item=35066/野蛮角斗士的板甲护胸
+        [EQUIPMENT_SLOT_WAIST] = 35161, -- item=35161/护卫者的板甲腰带
         [EQUIPMENT_SLOT_HANDS] = 35067, -- item=35067/野蛮角斗士的板甲手套
-        [EQUIPMENT_SLOT_LEGS] = 35069 -- item=35069/野蛮角斗士的板甲护腿
+        [EQUIPMENT_SLOT_LEGS] = 35069, -- item=35069/野蛮角斗士的板甲护腿
+        [EQUIPMENT_SLOT_FEET] = 35146, -- item=35146/护卫者的板甲护胫
+        [EQUIPMENT_SLOT_WRISTS] = 35176, -- item=35176/护卫者的板甲护腕
+        [EQUIPMENT_SLOT_FINGER1] = 35131, -- item=35131/护卫者的胜利指环
+        [EQUIPMENT_SLOT_FINGER2] = 35131, -- item=35131/护卫者的胜利指环
+        [EQUIPMENT_SLOT_TRINKET1] = 41589, -- item=41589/战斗大师的决断
+        [EQUIPMENT_SLOT_TRINKET2] = 41588, -- item=35131/护卫者的胜利指环
+        [EQUIPMENT_SLOT_BACK] = 41592, -- item=41592/角斗士的决心
+        [EQUIPMENT_SLOT_MAINHAND] = 35015, -- item=35015/野蛮角斗士的巨剑
+        -- [EQUIPMENT_SLOT_OFFHAND] = 
+        [EQUIPMENT_SLOT_RANGED] = 35108, -- item=35108/野蛮角斗士的战刃
+
     }
 }
 
@@ -83,7 +95,7 @@ function _Character:_EquipItem(player)
         -- 先删掉装备再穿
         local _offItem = player:GetEquippedItemBySlot(_slot)
         if _offItem then
-            print('SLOT :' .. _slot .. ' ,去除Item')
+            print('SLOT :' .. _slot .. ' ,removed Item')
             player:RemoveItem(_offItem, 1)
         end
 
@@ -97,30 +109,6 @@ function _Character:_EquipItem(player)
     end
 
 end
-
--- 每个职业都需要给一套初始装备，装备的ID根据职业ID来进行获取
--- 战士这里多一个学技能的函数
--- function _ClassInit:_Warrior(player)
---     print('THIS IS WARRIOR!')
-
---     -- 学习技能，包括武器技能，护甲技能
---     player:LearnSpell(PLATE_SPELL)
-
---     _Character:_EquipItem(player)
---     -- local _equippedItem = player:EquipItem(35068, 0)
---     -- print('equippedItem?  ', _equippedItem)
--- end
-
--- function _Character:_InitLoginPlayer(_classId, player)
---     -- [[ todo 判断 _choice 是否满足条件  ]] 
-
---     local _CASE = {
---         [1] = _Classer._Warrior
---     }
-
---     _CASE[_classId](player)
-
--- end
 
 -- 职业初始化
 local _Classer = {}
@@ -138,14 +126,7 @@ _Classer.Entry = {
 }
 
 function _Classer:Init(_classId, player)
-    -- print('THIS IS WARRIOR!')
-
-    -- -- 学习技能，包括武器技能，护甲技能
-    -- player:LearnSpell(PLATE_SPELL)
-
-    -- _Character:_EquipItem(player)
-    -- local _equippedItem = player:EquipItem(35068, 0)
-    -- print('equippedItem?  ', _equippedItem)
+    -- 通过ClassID自动选择职业
     self.Entry[_classId](player)
 
 end
@@ -160,7 +141,6 @@ local function _OnCustomLoginHandle(event, player)
     local _classId = player:GetClass()
 
     print('_classId: ', _classId)
-    print('_Equipments: ', _Equipments[_classId])
 
     if _level == 1 then
 
