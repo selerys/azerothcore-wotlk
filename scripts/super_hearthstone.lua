@@ -9,14 +9,10 @@ local GOSSIP_EVENT_ON_SELECT = 2
 local function OnCustomItemCallingGossip(event, player, item)
     player:SendBroadcastMessage(item:GetName())
     player:GossipClearMenu()
-    player:GossipMenuAddItem(0, "头部", 1, 0)
-    player:GossipMenuAddItem(1, "项链", 1, 1)
-    player:GossipMenuAddItem(2, "肩膀", 1, 2)
-    player:GossipMenuAddItem(3, "衬衣", 1, 3)
-    player:GossipMenuAddItem(4, "胸部", 1, 4)
-    player:GossipMenuAddItem(5, "腰带", 1, 5)
-    player:GossipMenuAddItem(6, "腿部", 1, 6)
-    player:GossipSendMenu(2593, item)
+    player:GossipMenuAddItem(0, "哨兵岭", 1, 0)
+    player:GossipMenuAddItem(0, "闪金镇", 1, 1)
+    player:GossipMenuAddItem(0, "赤脊山", 1, 2)
+    player:GossipSendMenu(18130, item)
     return false
 end
 
