@@ -6,8 +6,8 @@ local GOSSIP_EVENT_ON_SELECT = 2
 
 
 --
-local function OnCustomItemCallingGossip(event, player, object)
-    player:SendBroadcastMessage(object:GetEntry())
+local function OnCustomItemCallingGossip(event, player, item)
+    player:SendBroadcastMessage(item:GetName())
 end
 
 -- 注册物品的hello事件
