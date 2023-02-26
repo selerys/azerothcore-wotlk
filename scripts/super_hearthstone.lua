@@ -8,7 +8,7 @@ local GOSSIP_EVENT_ON_SELECT = 2
 --
 local function OnCustomItemCallingGossip(event, player, item)
     player:SendBroadcastMessage(item:GetName())
-    player:GossipSendMenu(48, 6948, 1)
+    -- player:GossipSendMenu(48, 6948, 1)
     return false
 end
 
